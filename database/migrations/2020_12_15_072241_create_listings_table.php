@@ -19,6 +19,7 @@ class CreateListingsTable extends Migration
             $table->enum('delivery_type', ['cod', 'postage']);
             $table->string('contact');
             $table->enum('status', ['available', 'sold']);
+            $table->double('price');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('image_id');
             $table->timestamps();
