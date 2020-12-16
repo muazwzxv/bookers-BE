@@ -18,10 +18,10 @@ class CreateListingsTable extends Migration
             $table->string('title');
             $table->enum('delivery_type', ['cod', 'postage']);
             $table->string('contact');
-            $table->timestamps();
             $table->enum('status', ['available', 'sold']);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('image_id');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
