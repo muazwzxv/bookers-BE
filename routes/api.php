@@ -22,3 +22,4 @@ Route::post('/register', 'App\Http\Controllers\AuthController@register');
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 
 Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
+Route::apiResource('/images', 'App\Http\Controllers\ImageController')->middleware('auth:api');
