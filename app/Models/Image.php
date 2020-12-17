@@ -12,4 +12,9 @@ class Image extends Model
     protected $fillable = [
         'binary'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'image_id');
+    }
 }

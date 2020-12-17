@@ -14,5 +14,11 @@ class Listing extends Model
         'delivery_type',
         'contact',
         'status',
+        'price'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

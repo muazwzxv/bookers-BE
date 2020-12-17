@@ -23,3 +23,4 @@ Route::post('/login', 'App\Http\Controllers\AuthController@login');
 
 Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
 Route::apiResource('/images', 'App\Http\Controllers\ImageController')->middleware('auth:api');
+Route::apiResource('/listings', 'App\Http\Controllers\ListingController')->middleware('auth:api');

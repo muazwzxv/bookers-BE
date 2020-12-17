@@ -55,6 +55,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return response(['message' => 'Deleted']);
+        return response(['message' => 'Deleted'], 200);
     }
 }

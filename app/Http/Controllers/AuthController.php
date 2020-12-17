@@ -11,7 +11,6 @@ class AuthController extends Controller
     //
     public function register(Request $req)
     {
-        //dd($req);
         $validate = $req->validate([
             'name' => ['required', 'max:55'],
             'email' => ['email', 'required'],
