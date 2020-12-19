@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\Image;
 use App\Http\Resources\ImageResource;
-use ImageHandler;
+use Images;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -18,31 +19,64 @@ class ImageController extends Controller
 
     function store(Request $req)
     {
-        $req->validate([
-            'binary' => ['required', 'image']
+        $validate = $req->validate([
+            'file' => ['required', 'mimes:png,jpg', 'max:2048']
         ]);
 
-        $image = Image::make($req->binary);
+        $fileName = $req->file('file')->getClientOriginalName();
+        $path = $req->file('file')->store('public/files');
 
-        return response(['image' => $image, 'message' => 'Successful'], 200);
+        $image = new Image();
+        $image->name = $fileName;
+        $image->path = $path;
+
+        $image->save();
+
+        return response(['message' => 'Data inserted successfully'], 200);
     }
 
-    public function show(Image $img)
+    public function show($id)
     {
-        return response(['image' => new ImageResource($img), 'message' => 'Retrieved successfully'], 204);
+        $image = Image::findOrFail($id);
+        $path = public_path() . '/../storage/app/' . $image->path;
+
+        return response()->file($path);
     }
 
-    public function update(Request $req, Image $img)
+    public function update(Request $req, $id)
     {
-        $img->update($req->all());
+        $validate = $req->validate([
+            'file' => ['required', 'mimes:png,jpg', 'max:2048']
+        ]);
 
-        return response(['image' => new ImageResource($img), 'message' => 'Update successfully'], 200);
+        $data = Image::findOrFail($id);
+        $filePath = $data->path;
+        if (Storage::exists($filePath)) {
+            Storage::delete($filePath);
+        } else {
+            return response(['message' => 'something went wrong'], 404);
+        }
+
+        $fileName = $req->file('file')->getClientOriginalName();
+        $newPath = $req->file('file')->store('public/files');
+
+        $data->update([
+            'name' => $fileName,
+            'path' => $newPath
+        ]);
+
+        return response(['image' => new ImageResource($data), 'message' => 'Update successfully'], 200);
     }
 
-    public function destroy(Image $img)
+    public function destroy($id)
     {
-        $img->delete();
-
-        return response(['message' => 'Deleted']);
+        $data = Image::findOrFail($id);
+        $path = $data->path;
+        if (Storage::exists($path)) {
+            Storage::delete($path);
+        } else {
+            return response(['message' => 'something wrong happened'], 400);
+        }
+        return response(['message' => 'Deleted'], 200);
     }
 }
