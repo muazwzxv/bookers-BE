@@ -20,8 +20,8 @@ class CreateListingsTable extends Migration
             $table->string('contact');
             $table->enum('status', ['available', 'sold']);
             $table->double('price');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('image_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

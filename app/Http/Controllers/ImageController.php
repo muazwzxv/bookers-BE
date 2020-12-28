@@ -32,7 +32,7 @@ class ImageController extends Controller
 
         $image->save();
 
-        return response(['message' => 'Data inserted successfully'], 200);
+        return response(['message' => 'Data inserted successfully', 'image' => $image], 200);
     }
 
     public function show($id)

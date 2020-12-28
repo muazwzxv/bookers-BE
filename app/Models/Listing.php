@@ -14,11 +14,18 @@ class Listing extends Model
         'delivery_type',
         'contact',
         'status',
-        'price'
+        'price',
+        'user_id',
+        'image_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 }

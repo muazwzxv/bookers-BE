@@ -21,10 +21,12 @@ class ListingController extends Controller
             'delivery_type' => ['required'],
             'contact' => ['required'],
             'status' => ['required'],
-            'price' => ['required']
+            'price' => ['required'],
+            'image_id' => ['required'],
+            'user_id' => ['required']
         ]);
-        $listing = Listing::create($validate);
 
+        $listing = Listing::create($validate);
         return response(['listing' => new ListingResource($listing), 'message' => 'Successfully created']);
     }
 

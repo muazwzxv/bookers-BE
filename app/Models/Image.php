@@ -14,8 +14,8 @@ class Image extends Model
         'path'
     ];
 
-    public function user()
+    public function listing()
     {
-        return $this->belongsTo(User::class, 'image_id');
+        return $this->hasOne(Listing::class);
     }
 }

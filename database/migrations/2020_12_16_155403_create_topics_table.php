@@ -18,7 +18,7 @@ class CreateTopicsTable extends Migration
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }
