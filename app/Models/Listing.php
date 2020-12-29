@@ -15,6 +15,7 @@ class Listing extends Model
         'contact',
         'status',
         'price',
+        'description',
         'user_id',
         'image_id',
     ];
