@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', 'App\Http\Controllers\AuthController@register');
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
+Route::get('/me', 'App\Http\Controllers\AuthController@me')->middleware('auth:api');
+Route::patch('/user/{id}', 'App\Http\Controllers\AuthController@update');
 
 Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
 Route::apiResource('/images', 'App\Http\Controllers\ImageController');

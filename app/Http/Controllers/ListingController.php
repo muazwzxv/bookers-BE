@@ -23,7 +23,6 @@ class ListingController extends Controller
             'status' => ['required'],
             'price' => ['required'],
             'description' => ['required'],
-            'image_id' => ['required'],
             'user_id' => ['required']
         ]);
 
