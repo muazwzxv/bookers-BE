@@ -23,6 +23,7 @@ Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::get('/me', 'App\Http\Controllers\AuthController@me')->middleware('auth:api');
 Route::patch('/user/{id}', 'App\Http\Controllers\AuthController@update');
 
+
 Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
 Route::apiResource('/images', 'App\Http\Controllers\ImageController');
 Route::apiResource('/categories', 'App\Http\Controllers\CategoryController');
@@ -30,3 +31,4 @@ Route::apiResource('/categories', 'App\Http\Controllers\CategoryController');
 Route::apiResource('/listings', 'App\Http\Controllers\ListingController');
 Route::apiResource('/topics', 'App\Http\Controllers\TopicController');
 // Route::apiResource('/listings', 'App\Http\Controllers\ListingController')->middleware('auth:api');
+Route::get('/listings/{id}/all', 'App\Http\Controllers\ListingController@fetchFromId');

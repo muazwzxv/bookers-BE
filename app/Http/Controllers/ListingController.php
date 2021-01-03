@@ -48,4 +48,11 @@ class ListingController extends Controller
 
         return response(['message' => 'Deleted'], 200);
     }
+
+    public function fetchFromId($id)
+    {
+        $data = Listing::where('user_id', $id)->get();
+
+        return response(['listings' => new ListingResource($data), 'message' => 'Retrieved successfully'], 200);
+    }
 }
