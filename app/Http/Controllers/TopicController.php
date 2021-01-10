@@ -28,8 +28,6 @@ class TopicController extends Controller
 
     public function show(Topic $topic)
     {
-        // dd($topic);
-        // return response(['Test ' => 'heheheh']);
         return response(['Topic' => new TopicResource($topic), 'Message' => 'Retrieved Successfully'], 200);
     }
 
