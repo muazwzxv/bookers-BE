@@ -23,12 +23,18 @@ Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::get('/me', 'App\Http\Controllers\AuthController@me')->middleware('auth:api');
 Route::patch('/user/{id}', 'App\Http\Controllers\AuthController@update');
 
+Route::get('/listings/{id}/all', 'App\Http\Controllers\ListingController@fetchFromId');
 
-Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
+// Route::post('/topic', 'App\Http\Controllers\TopicController@store');
+// Route::get('/topic', 'App\Http\Controllers\TopicController@show');
+
+// Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
+Route::apiResource('/users', 'App\Http\Controllers\UserController');
 Route::apiResource('/images', 'App\Http\Controllers\ImageController');
 Route::apiResource('/categories', 'App\Http\Controllers\CategoryController');
-// Route::apiResource('/images', 'App\Http\Controllers\ImageController')->middleware('auth:api');
 Route::apiResource('/listings', 'App\Http\Controllers\ListingController');
-Route::apiResource('/topics', 'App\Http\Controllers\TopicController');
-// Route::apiResource('/listings', 'App\Http\Controllers\ListingController')->middleware('auth:api');
-Route::get('/listings/{id}/all', 'App\Http\Controllers\ListingController@fetchFromId');
+Route::apiResource('/topic', 'App\Http\Controllers\TopicController');
+Route::apiResource('/comments', 'App\Http\Controllers\CommentController');
+
+
+

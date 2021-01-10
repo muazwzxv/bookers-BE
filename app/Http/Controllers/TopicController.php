@@ -12,29 +12,32 @@ class TopicController extends Controller
     public function index()
     {
         $topic = Topic::all();
-        return response(['topic' => new TopicResource($topic), 'message' => 'Retrieved successfully'], 204);
+        return response(['Topic' => new TopicResource($topic), 'Message' => 'Retrieved Successfully'], 200);
     }
 
     public function store(Request $req)
     {
         $validate = $req->validate([
             'name' => ['required'],
+            'category_id' => ['required']
         ]);
 
         $topic = Topic::create($validate);
-        return response(['topic' => new TopicResource($topic), 'message' => 'Created successfully'], 200);
+        return response(['Topic' => new TopicResource($topic), 'Message' => 'Created successfully'], 200);
     }
 
     public function show(Topic $topic)
     {
-        return response(['topic' => new TopicResource($topic), 'message' => 'Retrieved successfully'], 204);
+        // dd($topic);
+        // return response(['Test ' => 'heheheh']);
+        return response(['Topic' => new TopicResource($topic), 'Message' => 'Retrieved Successfully'], 200);
     }
 
     public function update(Request $req, Topic $topic)
     {
         $topic->update($req->all());
 
-        return response(['topic' => new TopicResource($topic), 'message' => 'Deleted'], 200);
+        return response(['Topic' => new TopicResource($topic), 'Message' => 'Deleted'], 200);
     }
 
     public function destroy(Topic $topic)
