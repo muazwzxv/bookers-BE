@@ -29,11 +29,12 @@ Route::get('/listings/{id}/all', 'App\Http\Controllers\ListingController@fetchFr
 // Route::get('/topic', 'App\Http\Controllers\TopicController@show');
 
 // Route::apiResource('/users', 'App\Http\Controllers\UserController')->middleware('auth:api');
+
+Route::get('comments/ref', 'App\Http\Controllers\CommentController@indexWithReference');
+
 Route::apiResource('/users', 'App\Http\Controllers\UserController');
 Route::apiResource('/images', 'App\Http\Controllers\ImageController');
 Route::apiResource('/categories', 'App\Http\Controllers\CategoryController');
 Route::apiResource('/listings', 'App\Http\Controllers\ListingController');
 Route::apiResource('/topic', 'App\Http\Controllers\TopicController');
-// Route::apiResource('/comments', 'App\Http\Controllers\CommentController');
-
-Route::get('comments/ref', 'App\Http\Controllers\CommentController@indexWithReference');
+Route::apiResource('/comments', 'App\Http\Controllers\CommentController');

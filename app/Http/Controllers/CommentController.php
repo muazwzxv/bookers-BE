@@ -22,16 +22,12 @@ class CommentController extends Controller
 
     public function indexWithReference()
     {
-        // $users = DB::table('users')
-        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        //     ->join('orders', 'users.id', '=', 'orders.user_id')
-        //     ->select('users.*', 'contacts.phone', 'orders.price')
-        //     ->get();
-
-        $comments = DB::table('users')
-            ->leftJoin('comments', 'users.id', '=', 'comments.user_id')
-            ->select('comments.*', 'users.*')
+        $comments = DB::table('comments')
+            ->join('topics', 'comments.topic_id', '=', 'topics.id')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->select('comments.*', 'topics.name as topicName', 'users.name as publisherName')
             ->get();
+
         return response(['Comment' => new CommentResources($comments)], 200);
     }
 
