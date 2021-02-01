@@ -34,7 +34,6 @@ Route::apiResource('/images', 'App\Http\Controllers\ImageController');
 Route::apiResource('/categories', 'App\Http\Controllers\CategoryController');
 Route::apiResource('/listings', 'App\Http\Controllers\ListingController');
 Route::apiResource('/topic', 'App\Http\Controllers\TopicController');
-Route::apiResource('/comments', 'App\Http\Controllers\CommentController');
+// Route::apiResource('/comments', 'App\Http\Controllers\CommentController');
 
-
-
+Route::get('comments/ref', 'App\Http\Controllers\CommentController@indexWithReference');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CommentResources;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -17,6 +18,21 @@ class CommentController extends Controller
     {
         $comment = Comment::all();
         return response(['Comment' => new CommentResources($comment)], 200);
+    }
+
+    public function indexWithReference()
+    {
+        // $users = DB::table('users')
+        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        //     ->join('orders', 'users.id', '=', 'orders.user_id')
+        //     ->select('users.*', 'contacts.phone', 'orders.price')
+        //     ->get();
+
+        $comments = DB::table('users')
+            ->leftJoin('comments', 'users.id', '=', 'comments.user_id')
+            ->select('comments.*', 'users.*')
+            ->get();
+        return response(['Comment' => new CommentResources($comments)], 200);
     }
 
     /**
